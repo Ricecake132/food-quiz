@@ -50,7 +50,7 @@ class QuizGame:
             temporary.replace(STATE_FILE)
             self.dirty = False
         except OSError as error:
-            print(f"저장에 실패했습니다. 종료할 때 다시 시도합니다. {error}")
+            print(f"저장에 실패했습니다. {error}")
         finally:
             if temporary is not None and temporary.exists():
                 try:
@@ -121,6 +121,11 @@ class QuizGame:
 
 if __name__ == "__main__":
     game = QuizGame()
-    game.load()
-    game.run()
-    game.save()
+    try:
+        game.load()
+        game.run()
+    except (KeyboardInterrupt, EOFError):
+        print("\n입력이 중단되었습니다. 완료된 변경 사항을 저장합니다.")
+    finally:
+        game.save()
+        print("게임을 종료합니다.")
