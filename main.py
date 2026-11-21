@@ -40,6 +40,7 @@ def list_quizzes(quizzes):
 
 def run():
     quizzes = default_quizzes()
+    best_score = None
     while True:
         print("\n일본 음식 이름 맞히기")
         print("1. 퀴즈 풀기   2. 퀴즈 추가   3. 퀴즈 목록   4. 점수 확인   5. 종료")
@@ -47,7 +48,10 @@ def run():
         if choice == 5:
             break
         if choice == 1:
-            play(quizzes)
+            score = play(quizzes)
+            if score is not None and (best_score is None or score > best_score):
+                best_score = score
+                print("최고 점수를 갱신했습니다.")
             continue
         if choice == 2:
             add_quiz(quizzes)
@@ -55,7 +59,8 @@ def run():
         if choice == 3:
             list_quizzes(quizzes)
             continue
-        print("준비 중인 기능입니다.")
+        if choice == 4:
+            print("아직 풀이 기록이 없습니다." if best_score is None else f"최고 점수: {best_score}점")
 
 
 if __name__ == "__main__":
