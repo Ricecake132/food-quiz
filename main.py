@@ -29,6 +29,15 @@ def add_quiz(quizzes):
     print("퀴즈를 추가했습니다.")
 
 
+def list_quizzes(quizzes):
+    if not quizzes:
+        print("등록된 문제가 없습니다.")
+        return
+    print(f"등록된 퀴즈 {len(quizzes)}개")
+    for index, quiz in enumerate(quizzes, start=1):
+        print(f"[{index}] {quiz.question}")
+
+
 def run():
     quizzes = default_quizzes()
     while True:
@@ -42,6 +51,9 @@ def run():
             continue
         if choice == 2:
             add_quiz(quizzes)
+            continue
+        if choice == 3:
+            list_quizzes(quizzes)
             continue
         print("준비 중인 기능입니다.")
 
