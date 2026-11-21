@@ -1,4 +1,5 @@
-from inputs import read_number
+from quiz import Quiz
+from inputs import read_number, read_text
 from questions import default_quizzes
 
 
@@ -20,6 +21,14 @@ def play(quizzes):
     return score
 
 
+def add_quiz(quizzes):
+    question = read_text("문제: ")
+    choices = [read_text(f"선택지 {index}: ") for index in range(1, 5)]
+    answer = read_number("정답 번호: ", 4)
+    quizzes.append(Quiz(question, choices, answer))
+    print("퀴즈를 추가했습니다.")
+
+
 def run():
     quizzes = default_quizzes()
     while True:
@@ -30,6 +39,9 @@ def run():
             break
         if choice == 1:
             play(quizzes)
+            continue
+        if choice == 2:
+            add_quiz(quizzes)
             continue
         print("준비 중인 기능입니다.")
 
