@@ -1,4 +1,6 @@
+import argparse
 import json
+import random
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
@@ -11,7 +13,8 @@ STATE_FILE = Path(__file__).with_name("state.json")
 
 
 class QuizGame:
-    def __init__(self):
+    def __init__(self, shuffle=False):
+        self.shuffle = shuffle
         self.quizzes = default_quizzes()
         self.best_score = None
         self.dirty = False
@@ -63,7 +66,10 @@ class QuizGame:
             print("등록된 문제가 없습니다.")
             return
         correct = 0
-        for index, quiz in enumerate(self.quizzes, start=1):
+        questions = self.quizzes.copy()
+        if self.shuffle:
+            random.shuffle(questions)
+        for index, quiz in enumerate(questions, start=1):
             print(f"\n[문제 {index}/{len(self.quizzes)}]")
             quiz.display()
             if quiz.is_correct(read_number("정답 번호: ", 4)):
@@ -120,7 +126,9 @@ class QuizGame:
 
 
 if __name__ == "__main__":
-    game = QuizGame()
+    parser = argparse.ArgumentParser(description="일본 음식 이름 맞히기")
+    parser.add_argument("--shuffle", action="store_true", help="매 게임마다 문제 순서를 섞습니다.")
+    game = QuizGame(shuffle=parser.parse_args().shuffle)
     try:
         game.load()
         game.run()
