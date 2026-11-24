@@ -4,6 +4,12 @@
 
 [평가 항목별 확인](#평가-항목별-확인) · [개발 과정과 실행 화면 보기](#개발-과정과-실행-화면)
 
+## 창으로 실행하기 (Windows)
+
+[게임 ZIP 다운로드](https://github.com/Ricecake132/food-quiz/archive/refs/heads/main.zip) 후 **모두 압축 풀기**를 선택하고, `main.py`와 같은 폴더의 **`food_quiz.pyw`**를 더블클릭하세요. Windows용 Python 3.10 이상과 Tkinter가 필요합니다. 창에서 보기를 눌러 답하고 문제를 등록할 수 있습니다. 최고 점수는 첫 화면에 표시됩니다. 파일 연결이 설정되지 않았다면 해당 폴더의 PowerShell에서 `py -3 .\food_quiz.pyw`로 실행하세요.
+
+창과 콘솔은 같은 폴더의 `state.json`을 공유합니다. 기존 노트북 기록을 이어가려면 기존 프로젝트 폴더에 `food_quiz.pyw`를 추가하세요.
+
 ## 실행
 
 Python 3.10 이상이 필요합니다. 프로젝트 폴더의 터미널에서 실행하세요. 추가 패키지 설치는 필요 없습니다.
